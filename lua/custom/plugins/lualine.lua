@@ -90,7 +90,7 @@ return {
           },
           {
             function()
-              return '󰯂'
+              return ''
             end,
             color = { fg = '#1a1b26' },
             padding = { left = 0, right = 1 }, -- no space after icon
