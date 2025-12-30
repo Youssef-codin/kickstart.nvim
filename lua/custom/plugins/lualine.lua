@@ -54,7 +54,24 @@ return {
             separator = { right = '' },
             color = { fg = '#16161e' },
           },
-          { 'branch', icon = '󰘬', color = { bg = '#16161e' } },
+          {
+            'branch',
+            color = { bg = '#1a1b26' },
+            separator = { right = '' },
+            icon = '',
+          },
+          {
+            'diff',
+            symbols = {
+              added = ' ',
+              modified = '󰛿 ',
+              removed = ' ',
+              ahead = '↑',
+              behind = '↓',
+            },
+            color = { bg = '#20212c' },
+            separator = { right = '' },
+          },
         },
 
         -- CENTER — leave blank for symmetry
@@ -79,15 +96,6 @@ return {
 
         -- FILE META + GIT DIFF
         lualine_y = {
-          {
-            'diff',
-            symbols = {
-              added = ' ',
-              modified = ' ',
-              removed = ' ',
-            },
-            color = { bg = '#20212c' },
-          },
           {
             function()
               return ''
