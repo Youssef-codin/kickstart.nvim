@@ -1,6 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = { 'nvim-tree/nvim-web-devicons', 'abccsss/nvim-gitstatus' },
   config = function()
     local theme = require 'custom.lualine-config.lualinetheme'
 
@@ -61,13 +61,22 @@ return {
             icon = '',
           },
           {
+            'gitstatus',
+            color = { bg = '#1a1b26' },
+            separator = { right = '' },
+            sections = {
+              { 'ahead', format = '{}↑' },
+              { 'behind', format = '{}↓' },
+              { 'conflicted', format = '{}!' },
+            },
+            padding = { left = 0, right = 1 },
+          },
+          {
             'diff',
             symbols = {
               added = ' ',
               modified = '󰛿 ',
               removed = ' ',
-              ahead = '↑',
-              behind = '↓',
             },
             color = { bg = '#20212c' },
             separator = { right = '' },
