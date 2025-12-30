@@ -1,3 +1,39 @@
+local function grep_quickfix_files()
+  local qflist = vim.fn.getqflist()
+  if vim.tbl_isempty(qflist) then
+    vim.notify('Quickfix list is empty', vim.log.levels.WARN)
+    return
+  end
+
+  local files = {}
+  local seen = {}
+
+  for _, item in ipairs(qflist) do
+    if item.bufnr and item.bufnr > 0 then
+      local name = vim.api.nvim_buf_get_name(item.bufnr)
+      if name ~= '' and not seen[name] then
+        seen[name] = true
+        table.insert(files, name)
+      end
+    end
+  end
+
+  require('telescope.builtin').live_grep {
+    search_dirs = files,
+    prompt_title = 'Grep Quickfix Files',
+  }
+end
+
+local centered = {
+  layout_strategy = 'center',
+  layout_config = {
+    anchor = 'S',
+    height = 0.40,
+    width = 0.97,
+    preview_cutoff = 1,
+  },
+}
+
 return {
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
@@ -50,6 +86,7 @@ return {
           prompt_prefix = '   ',
           selection_caret = '❯ ',
           path_display = { 'truncate' },
+
           file_ignore_patterns = {
             'node_modules',
             'vendor',
@@ -57,26 +94,26 @@ return {
             'dist',
             'build',
           },
-          layout_strategy = 'center',
-          layout_config = {
-            anchor = 'S',
-            height = 0.40,
-            width = 0.97,
-            preview_cutoff = 1,
-          },
+
+          border = true,
           borderchars = {
             prompt = { '─', '│', '─', '│', '┌', '┐', '┼', '┼' },
             results = { '─', '│', '─', '│', '├', '┤', '┘', '└' },
             preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
           },
-          border = true,
         },
 
-        extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_cursor(),
-          },
+        pickers = {
+          find_files = centered,
+          buffers = centered,
+          oldfiles = centered,
+          live_grep = centered,
+          grep_string = centered,
+          diagnostics = centered,
+          help_tags = centered,
         },
+
+        extensions = { ['ui-select'] = require('telescope.themes').get_cursor() },
       }
 
       -- Enable Telescope extensions if they are installed
@@ -121,17 +158,8 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
 
-      vim.keymap.set('n', '<leader>sl', function()
-        local utils = require 'telescope.utils'
-
-        local ok, cwd = pcall(utils.get_git_root)
-        cwd = ok and cwd or vim.fn.expand '%:p:h'
-
-        local success = pcall(builtin.git_files, { cwd = cwd })
-        if not success then
-          builtin.find_files { cwd = cwd }
-        end
-      end, { desc = '[S]earch [L]ocal files (git → fallback)' })
+      -- NOTE: MINE
+      vim.keymap.set('n', '<leader>q', grep_quickfix_files, { desc = 'Grep inside quickfix files' })
 
       vim.keymap.set('n', '<leader>sg', function()
         local utils = require 'telescope.utils'
@@ -143,8 +171,29 @@ return {
       end, { desc = '[S]earch by [G]rep (git → fallback)' })
 
       vim.keymap.set('n', '<leader>sp', function()
-        require('telescope').extensions.projects.projects {}
+        require('telescope').extensions.projects.projects {
+          layout_config = {
+            width = 0.7,
+          },
+          borderchars = {
+            prompt = { '─', '│', '─', '│', '┌', '┐', '╯', '╰' },
+            results = { '─', '│', '─', '│', '╭', '╮', '┘', '└' },
+            -- preview will stay default
+          },
+        }
       end, { desc = '[S]earch [P]rojects' })
+
+      vim.keymap.set('n', '<leader>sl', function()
+        local utils = require 'telescope.utils'
+
+        local ok, cwd = pcall(utils.get_git_root)
+        cwd = ok and cwd or vim.fn.expand '%:p:h'
+
+        local success = pcall(builtin.git_files, centered, { cwd = cwd })
+        if not success then
+          builtin.find_files { centered, cwd = cwd }
+        end
+      end, { desc = '[S]earch [L]ocal files (git → fallback)' })
     end,
   },
 }
