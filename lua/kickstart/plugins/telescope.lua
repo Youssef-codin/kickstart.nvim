@@ -41,11 +41,8 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
-
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
         build = 'make',
 
         -- `cond` is a condition used to determine whether this plugin should be
@@ -165,7 +162,11 @@ return {
         local utils = require 'telescope.utils'
 
         local ok, cwd = pcall(utils.get_git_root)
-        cwd = ok and cwd or vim.fn.expand '%:p:h'
+
+        if not ok then
+          -- fallback: look for pom.xml or build.gradle (Java project markers)
+          cwd = vim.fn.getcwd() -- search from cwd, not current file dir
+        end
 
         builtin.live_grep { cwd = cwd }
       end, { desc = '[S]earch by [G]rep (git → fallback)' })

@@ -9,8 +9,8 @@ local colors = {
   b = { bg = '#f472b6', fg = '#16161e' }, -- project badge stays pink
   c = { bg = '#16161e', fg = '#d7daf0' },
   x = { bg = '#c099ff', fg = '#16161e' }, -- lilac
-  y = { bg = '#f8bd96', fg = '#16161e' }, -- soft orange
-  z = { bg = '#f25f76', fg = '#16161e' }, -- reddish‑pink
+  y = { bg = '#f8bd96', fg = '#16161e' }, -- soft orange (NORMAL)
+  z = { bg = '#f25f76', fg = '#16161e' }, -- reddish‑pink (NORMAL)
 
   bright = {
     normal = '#7aa2f7', -- blue
@@ -36,8 +36,8 @@ return {
     b = { bg = colors.x.bg, fg = colors.bright.insert, gui = 'bold' },
     c = { bg = colors.c.bg, fg = colors.c.fg },
     x = { bg = colors.x.bg, fg = colors.bright.insert, gui = 'bold' },
-    y = { bg = colors.y.bg, fg = colors.bright.insert, gui = 'bold' },
-    z = { bg = colors.z.bg, fg = colors.bright.insert, gui = 'bold' },
+    y = { bg = '#c099ff', fg = colors.bright.insert, gui = 'bold' }, -- lilac for insert
+    z = { bg = '#7aa2f7', fg = colors.bright.insert, gui = 'bold' }, -- blue for insert
   },
 
   visual = {
@@ -45,8 +45,8 @@ return {
     b = { bg = colors.z.bg, fg = colors.bright.visual, gui = 'bold' },
     c = { bg = colors.c.bg, fg = colors.c.fg },
     x = { bg = colors.x.bg, fg = colors.bright.visual, gui = 'bold' },
-    y = { bg = colors.y.bg, fg = colors.bright.visual, gui = 'bold' },
-    z = { bg = colors.z.bg, fg = colors.bright.visual, gui = 'bold' },
+    y = { bg = '#f78fb3', fg = colors.bright.visual, gui = 'bold' }, -- pink for visual
+    z = { bg = '#f8bd96', fg = colors.bright.visual, gui = 'bold' }, -- orange for visual
   },
 
   replace = {
@@ -54,8 +54,8 @@ return {
     b = { bg = colors.y.bg, fg = colors.bright.replace, gui = 'bold' },
     c = { bg = colors.c.bg, fg = colors.c.fg },
     x = { bg = colors.x.bg, fg = colors.bright.replace, gui = 'bold' },
-    y = { bg = colors.y.bg, fg = colors.bright.replace, gui = 'bold' },
-    z = { bg = colors.z.bg, fg = colors.bright.replace, gui = 'bold' },
+    y = { bg = '#c099ff', fg = colors.bright.replace, gui = 'bold' }, -- lilac for replace
+    z = { bg = '#f78fb3', fg = colors.bright.replace, gui = 'bold' }, -- pink for replace
   },
 
   command = {
@@ -63,8 +63,8 @@ return {
     b = { bg = colors.a.bg, fg = colors.bright.command, gui = 'bold' },
     c = { bg = colors.c.bg, fg = colors.c.fg },
     x = { bg = colors.x.bg, fg = colors.bright.command, gui = 'bold' },
-    y = { bg = colors.y.bg, fg = colors.bright.command, gui = 'bold' },
-    z = { bg = colors.z.bg, fg = colors.bright.command, gui = 'bold' },
+    y = { bg = '#7aa2f7', fg = colors.bright.command, gui = 'bold' }, -- blue for command
+    z = { bg = '#c099ff', fg = colors.bright.command, gui = 'bold' }, -- lilac for command
   },
 
   inactive = {
