@@ -36,12 +36,12 @@ return {
 
         java = { 'google-java-format' },
 
-        javascript = { 'prettierd', 'prettier' },
-        typescript = { 'prettierd', 'prettier' },
-        javascriptreact = { 'prettierd', 'prettier' },
-        typescriptreact = { 'prettierd', 'prettier' },
+        javascript = { 'biome' },
+        typescript = { 'biome' },
+        javascriptreact = { 'biome' },
+        typescriptreact = { 'biome' },
 
-        json = { 'prettierd', 'prettier' },
+        json = { 'biome' },
         yaml = { 'prettierd', 'prettier' },
         markdown = { 'prettierd', 'prettier' },
 
