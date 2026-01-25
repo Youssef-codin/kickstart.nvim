@@ -25,6 +25,10 @@ return {
         -- Number of characters after which to break the line
         after = 25,
       },
+
+      options = {
+        show_source = { enabled = true },
+      },
     }
     vim.diagnostic.config { virtual_text = false }
   end,
