@@ -116,7 +116,7 @@ return {
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension 'projects')
+      pcall(require('telescope').load_extension, 'projects')
 
       -- See `:help telescope.b.startinguiltin`
       local builtin = require 'telescope.builtin'
