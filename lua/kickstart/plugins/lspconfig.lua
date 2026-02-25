@@ -234,7 +234,17 @@ return {
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-        vtsls = {},
+        vtsls = {
+          settings = {
+            typescript = {
+              preferences = {
+                importModuleSpecifier = 'non-relative',
+                importModuleSpecifierEnding = 'minimal',
+                includePackageJsonAutoImports = 'on',
+              },
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = { ... },
