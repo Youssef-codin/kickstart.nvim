@@ -57,6 +57,8 @@ return {
         go = { 'golines' },
 
         toml = { 'taplo' },
+
+        sql = { 'sql_formatter' },
       },
     },
   },
