@@ -43,7 +43,7 @@ return {
 
         json = { 'biome' },
         yaml = { 'prettierd', 'prettier' },
-        markdown = { 'prettierd', 'prettier' },
+        markdown = { 'markdown-lint', 'prettierd', 'prettier' },
 
         html = { 'prettierd', 'prettier' },
         css = { 'prettierd', 'prettier' },
