@@ -21,6 +21,7 @@ return {
       'typescript',
       'javascript',
     },
+    preview = true,
   },
   config = function(_, opts)
     local ts = require 'nvim-treesitter'
